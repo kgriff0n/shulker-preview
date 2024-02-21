@@ -1,0 +1,28 @@
+{
+	"schemaVersion": 1,
+	"id": "shulker-preview",
+	"version": "${version}",
+	"name": "Shulker Preview",
+	"description": "Allows you to see contents of a shulker without place it.",
+	"authors": [
+		"KGriffon"
+	],
+	"contact": {
+		"homepage": "https://modrinth.com/mod/shulker-preview",
+		"sources": "https://github.com/kgriff0n/shulker-preview"
+	},
+	"license": "MIT",
+	"icon": "assets/shulker-preview/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"client": [
+			"io.github.kgriff0n.ShulkerPreview"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.14.21",
+		"minecraft": ">=1.20",
+		"java": ">=17",
+		"fabric-api": "*"
+	}
+}
