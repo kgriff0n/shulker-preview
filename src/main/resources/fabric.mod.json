@@ -3,7 +3,7 @@
 	"id": "shulker-preview",
 	"version": "${version}",
 	"name": "Shulker Preview",
-	"description": "Allows you to see contents of a shulker without place it.",
+	"description": "Allows you to see contents of a shulker without placing it.",
 	"authors": [
 		"KGriffon"
 	],
