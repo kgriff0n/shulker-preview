@@ -4,6 +4,7 @@ import io.github.kgriff0n.screen.FakeShulkerScreen;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.item.Item;
@@ -16,12 +17,16 @@ import java.util.HashMap;
 
 public class ShulkerPreview implements ClientModInitializer {
 
+	public static MinecraftClient client;
+
 	public static final HashMap<Item, Color> SHULKER_COLORS = new HashMap<>();
 
 	private static KeyBinding key;
 
 	@Override
 	public void onInitializeClient() {
+
+		client = MinecraftClient.getInstance();
 
 		SHULKER_COLORS.put(Items.SHULKER_BOX, new Color(142, 108, 142));
 		SHULKER_COLORS.put(Items.WHITE_SHULKER_BOX, new Color(225, 230, 230));
@@ -42,7 +47,7 @@ public class ShulkerPreview implements ClientModInitializer {
 		SHULKER_COLORS.put(Items.PINK_SHULKER_BOX, new Color(239, 135, 166));
 
 		key = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-				"Open Shulker",
+				"open_shulker",
 				InputUtil.Type.KEYSYM,
 				GLFW.GLFW_KEY_V,
 				"Shulker Preview"
@@ -53,7 +58,7 @@ public class ShulkerPreview implements ClientModInitializer {
 				ItemStack stack = client.player.getMainHandStack();
 				while (key.wasPressed()) {
 					if (SHULKER_COLORS.containsKey(stack.getItem())) {
-						client.setScreen(new FakeShulkerScreen(client.player.getMainHandStack()));
+						client.setScreen(new FakeShulkerScreen(stack));
 					}
 				}
 			}

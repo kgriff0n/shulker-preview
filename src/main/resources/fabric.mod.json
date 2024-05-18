@@ -19,6 +19,9 @@
 			"io.github.kgriff0n.ShulkerPreview"
 		]
 	},
+	"mixins": [
+		"shulker-preview.mixins.json"
+	],
 	"depends": {
 		"fabricloader": ">=0.14.21",
 		"minecraft": ">=1.20",
