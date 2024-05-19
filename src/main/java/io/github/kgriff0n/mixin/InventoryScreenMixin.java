@@ -23,10 +23,9 @@ public class InventoryScreenMixin {
         if (button == 1) {
             ItemStack stack = slot.getStack();
             if (SHULKER_COLORS.containsKey(stack.getItem())) {
-                client.player.closeHandledScreen();
-                client.setScreen(new FakeShulkerScreen(stack));
+                ci.cancel();
+                client.setScreen(new FakeShulkerScreen(stack, client.currentScreen));
             }
-            ci.cancel();
         }
     }
 

@@ -4,6 +4,7 @@ import io.github.kgriff0n.ShulkerPreview;
 import io.github.kgriff0n.ShulkerUtil;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -22,15 +23,17 @@ public class FakeShulkerScreen extends Screen {
     private final Color color;
     private final Text title;
     private final ArrayList<ItemStack> inventory;
+    private final Screen parent;
 
     private int x = 0;
     private int y = 0;
 
-    public FakeShulkerScreen(ItemStack shulker) {
+    public FakeShulkerScreen(ItemStack shulker, Screen parent) {
         super(Text.literal("Fake Shulker"));
         this.color = ShulkerPreview.SHULKER_COLORS.get(shulker.getItem());
         this.title = shulker.getName();
         this.inventory = ShulkerUtil.getShulkerInventory(shulker);
+        this.parent = parent;
 
     }
 
@@ -61,7 +64,10 @@ public class FakeShulkerScreen extends Screen {
         context.setShaderColor(1f, 1f, 1f, 1f);
     }
 
-
+    @Override
+    public void close() {
+        client.setScreen(parent);
+    }
 
     private void renderItems(DrawContext context, ArrayList<ItemStack> inventory, int x, int y) {
         int baseX = x;

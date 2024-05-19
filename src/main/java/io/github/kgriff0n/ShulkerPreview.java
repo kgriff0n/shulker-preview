@@ -58,7 +58,7 @@ public class ShulkerPreview implements ClientModInitializer {
 				ItemStack stack = client.player.getMainHandStack();
 				while (key.wasPressed()) {
 					if (SHULKER_COLORS.containsKey(stack.getItem())) {
-						client.setScreen(new FakeShulkerScreen(stack));
+						client.setScreen(new FakeShulkerScreen(stack, null));
 					}
 				}
 			}
