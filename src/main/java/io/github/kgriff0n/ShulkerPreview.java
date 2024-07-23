@@ -21,7 +21,7 @@ public class ShulkerPreview implements ClientModInitializer {
 
 	public static final HashMap<Item, Color> SHULKER_COLORS = new HashMap<>();
 
-	private static KeyBinding key;
+	public static KeyBinding key;
 
 	@Override
 	public void onInitializeClient() {

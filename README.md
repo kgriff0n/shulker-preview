@@ -9,7 +9,7 @@ Here is a demo :
 
 ![Preview Shulker Demo](img/shulker-demo.gif)
 
-As of **version 1.1**, you can also open shulkers in inventory and containers by right-clicking.
+As of **version 1.2**, you can also open shulkers in inventory and containers.
 
 **Each shulker color has its own display :**
 
