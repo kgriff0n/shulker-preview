@@ -3,6 +3,7 @@ package io.github.kgriff0n.screen;
 import io.github.kgriff0n.ShulkerPreview;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -59,10 +60,8 @@ public class FakeShulkerScreen extends Screen {
 
     @Override
     public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
-        context.setShaderColor(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, 1f);
-        context.drawTexture(TEXTURE, this.x, this.y, 0, 0, this.backgroundWidth, this.backgroundHeight);
+        context.drawTexture(RenderLayer::getGuiTextured, TEXTURE, this.x, this.y, 0.0F, 0.0F, this.backgroundWidth, this.backgroundHeight, 256, 256, this.color.getRGB());
         context.drawText(textRenderer, this.title, this.x + 8, this.y + 6, 0x404040, false);
-        context.setShaderColor(1f, 1f, 1f, 1f);
     }
 
     @Override
@@ -76,7 +75,7 @@ public class FakeShulkerScreen extends Screen {
         for (ItemStack item : inventory) {
             count++;
             context.drawItem(item, x, y);
-            context.drawItemInSlot(textRenderer, item, x, y);
+            context.drawStackOverlay(textRenderer, item, x, y);
             x += 18;
             if (count % 9 == 0) {
                 x = baseX;
