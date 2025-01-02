@@ -23,8 +23,8 @@
 		"shulker-preview.mixins.json"
 	],
 	"depends": {
-		"fabricloader": ">=0.15.0",
-		"minecraft": ">=1.21.3",
+		"fabricloader": ">=0.16.0",
+		"minecraft": ">=1.21.4",
 		"java": ">=21",
 		"fabric-api": "*"
 	}
