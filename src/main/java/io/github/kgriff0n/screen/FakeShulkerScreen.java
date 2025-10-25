@@ -13,10 +13,12 @@ import net.minecraft.util.Identifier;
 import java.awt.*;
 import java.util.List;
 
+import static io.github.kgriff0n.ShulkerPreview.MOD_ID;
+
 
 public class FakeShulkerScreen extends Screen {
 
-    private static final Identifier TEXTURE = Identifier.of("shulker-preview", "textures/gui/fake_shulker_box.png");
+    private static final Identifier TEXTURE = Identifier.of(MOD_ID, "textures/gui/fake_shulker_box.png");
 
     private final int backgroundWidth = 176;
     private final int backgroundHeight = 78;

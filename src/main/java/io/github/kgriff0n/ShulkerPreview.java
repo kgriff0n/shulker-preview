@@ -10,12 +10,15 @@ import net.minecraft.client.util.InputUtil;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.util.Identifier;
 import org.lwjgl.glfw.GLFW;
 
 import java.awt.*;
 import java.util.HashMap;
 
 public class ShulkerPreview implements ClientModInitializer {
+
+    public static final String MOD_ID = "shulker-preview";
 
 	public static MinecraftClient client;
 
@@ -46,11 +49,12 @@ public class ShulkerPreview implements ClientModInitializer {
 		SHULKER_COLORS.put(Items.MAGENTA_SHULKER_BOX, new Color(183, 61, 172));
 		SHULKER_COLORS.put(Items.PINK_SHULKER_BOX, new Color(239, 135, 166));
 
+        KeyBinding.Category category = KeyBinding.Category.create(Identifier.of(MOD_ID, "main"));
 		key = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-				"open_shulker",
+				"key.open_shulker",
 				InputUtil.Type.KEYSYM,
 				GLFW.GLFW_KEY_V,
-				"Shulker Preview"
+				category
 		));
 
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
