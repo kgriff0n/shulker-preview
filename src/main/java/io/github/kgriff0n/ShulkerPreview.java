@@ -1,16 +1,16 @@
 package io.github.kgriff0n;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import io.github.kgriff0n.screen.FakeShulkerScreen;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.util.InputUtil;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.util.Identifier;
+import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
+import net.minecraft.client.KeyMapping;
+import net.minecraft.client.Minecraft;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import org.lwjgl.glfw.GLFW;
 
 import java.awt.*;
@@ -20,16 +20,16 @@ public class ShulkerPreview implements ClientModInitializer {
 
     public static final String MOD_ID = "shulker-preview";
 
-	public static MinecraftClient client;
+	public static Minecraft client;
 
 	public static final HashMap<Item, Color> SHULKER_COLORS = new HashMap<>();
 
-	public static KeyBinding key;
+	public static KeyMapping key;
 
 	@Override
 	public void onInitializeClient() {
 
-		client = MinecraftClient.getInstance();
+		client = Minecraft.getInstance();
 
 		SHULKER_COLORS.put(Items.SHULKER_BOX, new Color(142, 108, 142));
 		SHULKER_COLORS.put(Items.WHITE_SHULKER_BOX, new Color(225, 230, 230));
@@ -49,18 +49,18 @@ public class ShulkerPreview implements ClientModInitializer {
 		SHULKER_COLORS.put(Items.MAGENTA_SHULKER_BOX, new Color(183, 61, 172));
 		SHULKER_COLORS.put(Items.PINK_SHULKER_BOX, new Color(239, 135, 166));
 
-        KeyBinding.Category category = KeyBinding.Category.create(Identifier.of(MOD_ID, "main"));
-		key = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+        KeyMapping.Category category = KeyMapping.Category.register(Identifier.fromNamespaceAndPath(MOD_ID, "main"));
+		key = KeyMappingHelper.registerKeyMapping(new KeyMapping(
 				"key.open_shulker",
-				InputUtil.Type.KEYSYM,
+				InputConstants.Type.KEYSYM,
 				GLFW.GLFW_KEY_V,
 				category
 		));
 
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
 			if (client.player != null) {
-				ItemStack stack = client.player.getMainHandStack();
-				while (key.wasPressed()) {
+				ItemStack stack = client.player.getMainHandItem();
+				while (key.consumeClick()) {
 					if (SHULKER_COLORS.containsKey(stack.getItem())) {
 						client.setScreen(new FakeShulkerScreen(stack, null));
 					}

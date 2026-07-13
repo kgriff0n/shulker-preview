@@ -2,10 +2,10 @@ package io.github.kgriff0n.mixin;
 
 import io.github.kgriff0n.ShulkerPreview;
 import io.github.kgriff0n.screen.FakeShulkerScreen;
-import net.minecraft.client.gui.screen.ingame.HandledScreen;
-import net.minecraft.client.input.KeyInput;
-import net.minecraft.item.ItemStack;
-import net.minecraft.screen.slot.Slot;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.input.KeyEvent;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -16,17 +16,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import static io.github.kgriff0n.ShulkerPreview.SHULKER_COLORS;
 import static io.github.kgriff0n.ShulkerPreview.client;
 
-@Mixin(HandledScreen.class)
+@Mixin(AbstractContainerScreen.class)
 public class InventoryScreenMixin {
 
-    @Shadow @Nullable protected Slot focusedSlot;
+    @Shadow @Nullable protected Slot hoveredSlot;
 
     @Inject(at = @At("HEAD"), method = "keyPressed")
-    private void keyPressed(KeyInput input, CallbackInfoReturnable<Boolean> cir) {
-        if (ShulkerPreview.key.matchesKey(input) && this.focusedSlot != null) {
-            ItemStack stack = this.focusedSlot.getStack();
+    private void keyPressed(KeyEvent input, CallbackInfoReturnable<Boolean> cir) {
+        if (ShulkerPreview.key.matches(input) && this.hoveredSlot != null) {
+            ItemStack stack = this.hoveredSlot.getItem();
             if (SHULKER_COLORS.containsKey(stack.getItem())) {
-                client.setScreen(new FakeShulkerScreen(stack, client.currentScreen));
+                client.setScreen(new FakeShulkerScreen(stack, client.screen));
             }
         }
     }
