@@ -22,11 +22,11 @@ public class InventoryScreenMixin {
     @Shadow @Nullable protected Slot hoveredSlot;
 
     @Inject(at = @At("HEAD"), method = "keyPressed")
-    private void keyPressed(KeyEvent input, CallbackInfoReturnable<Boolean> cir) {
-        if (ShulkerPreview.key.matches(input) && this.hoveredSlot != null) {
+    private void keyPressed(KeyEvent event, CallbackInfoReturnable<Boolean> cir) {
+        if (ShulkerPreview.key.matches(event) && this.hoveredSlot != null) {
             ItemStack stack = this.hoveredSlot.getItem();
             if (SHULKER_COLORS.containsKey(stack.getItem())) {
-                client.setScreen(new FakeShulkerScreen(stack, client.screen));
+                client.setScreenAndShow(new FakeShulkerScreen(stack, client.gui.screen()));
             }
         }
     }

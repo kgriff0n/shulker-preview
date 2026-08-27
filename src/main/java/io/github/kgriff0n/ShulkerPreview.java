@@ -32,22 +32,22 @@ public class ShulkerPreview implements ClientModInitializer {
 		client = Minecraft.getInstance();
 
 		SHULKER_COLORS.put(Items.SHULKER_BOX, new Color(142, 108, 142));
-		SHULKER_COLORS.put(Items.WHITE_SHULKER_BOX, new Color(225, 230, 230));
-		SHULKER_COLORS.put(Items.LIGHT_GRAY_SHULKER_BOX, new Color(137, 137, 128));
-		SHULKER_COLORS.put(Items.GRAY_SHULKER_BOX, new Color(60, 65, 68));
-		SHULKER_COLORS.put(Items.BLACK_SHULKER_BOX, new Color(31, 31, 35));
-		SHULKER_COLORS.put(Items.BROWN_SHULKER_BOX, new Color(113, 70, 39));
-		SHULKER_COLORS.put(Items.RED_SHULKER_BOX, new Color(152, 36, 34));
-		SHULKER_COLORS.put(Items.ORANGE_SHULKER_BOX, new Color(241, 114, 15));
-		SHULKER_COLORS.put(Items.YELLOW_SHULKER_BOX, new Color(249, 196, 35));
-		SHULKER_COLORS.put(Items.LIME_SHULKER_BOX, new Color(110, 185, 24));
-		SHULKER_COLORS.put(Items.GREEN_SHULKER_BOX, new Color(83, 107, 29));
-		SHULKER_COLORS.put(Items.CYAN_SHULKER_BOX, new Color(22, 133, 144));
-		SHULKER_COLORS.put(Items.LIGHT_BLUE_SHULKER_BOX, new Color(57, 177, 215));
-		SHULKER_COLORS.put(Items.BLUE_SHULKER_BOX, new Color(49, 52, 152));
-		SHULKER_COLORS.put(Items.PURPLE_SHULKER_BOX, new Color(113, 37, 166));
-		SHULKER_COLORS.put(Items.MAGENTA_SHULKER_BOX, new Color(183, 61, 172));
-		SHULKER_COLORS.put(Items.PINK_SHULKER_BOX, new Color(239, 135, 166));
+		SHULKER_COLORS.put(Items.DYED_SHULKER_BOX.white(), new Color(225, 230, 230));
+		SHULKER_COLORS.put(Items.DYED_SHULKER_BOX.lightGray(), new Color(137, 137, 128));
+		SHULKER_COLORS.put(Items.DYED_SHULKER_BOX.gray(), new Color(60, 65, 68));
+		SHULKER_COLORS.put(Items.DYED_SHULKER_BOX.black(), new Color(31, 31, 35));
+		SHULKER_COLORS.put(Items.DYED_SHULKER_BOX.brown(), new Color(113, 70, 39));
+		SHULKER_COLORS.put(Items.DYED_SHULKER_BOX.red(), new Color(152, 36, 34));
+		SHULKER_COLORS.put(Items.DYED_SHULKER_BOX.orange(), new Color(241, 114, 15));
+		SHULKER_COLORS.put(Items.DYED_SHULKER_BOX.yellow(), new Color(249, 196, 35));
+		SHULKER_COLORS.put(Items.DYED_SHULKER_BOX.lime(), new Color(110, 185, 24));
+		SHULKER_COLORS.put(Items.DYED_SHULKER_BOX.green(), new Color(83, 107, 29));
+		SHULKER_COLORS.put(Items.DYED_SHULKER_BOX.cyan(), new Color(22, 133, 144));
+		SHULKER_COLORS.put(Items.DYED_SHULKER_BOX.lightBlue(), new Color(57, 177, 215));
+		SHULKER_COLORS.put(Items.DYED_SHULKER_BOX.blue(), new Color(49, 52, 152));
+		SHULKER_COLORS.put(Items.DYED_SHULKER_BOX.purple(), new Color(113, 37, 166));
+		SHULKER_COLORS.put(Items.DYED_SHULKER_BOX.magenta(), new Color(183, 61, 172));
+		SHULKER_COLORS.put(Items.DYED_SHULKER_BOX.pink(), new Color(239, 135, 166));
 
         KeyMapping.Category category = KeyMapping.Category.register(Identifier.fromNamespaceAndPath(MOD_ID, "main"));
 		key = KeyMappingHelper.registerKeyMapping(new KeyMapping(
@@ -62,7 +62,7 @@ public class ShulkerPreview implements ClientModInitializer {
 				ItemStack stack = client.player.getMainHandItem();
 				while (key.consumeClick()) {
 					if (SHULKER_COLORS.containsKey(stack.getItem())) {
-						client.setScreen(new FakeShulkerScreen(stack, null));
+						client.setScreenAndShow(new FakeShulkerScreen(stack, null));
 					}
 				}
 			}

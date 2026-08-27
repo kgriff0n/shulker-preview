@@ -68,7 +68,7 @@ public class FakeShulkerScreen extends Screen {
 
     @Override
     public void onClose() {
-        minecraft.setScreen(parent);
+        minecraft.setScreenAndShow(parent);
     }
 
     private void renderItems(GuiGraphicsExtractor context, List<ItemStack> inventory, int x, int y) {
