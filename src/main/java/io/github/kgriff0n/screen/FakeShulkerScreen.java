@@ -35,7 +35,7 @@ public class FakeShulkerScreen extends Screen {
         super(Component.literal("Fake Shulker"));
         this.color = ShulkerPreview.SHULKER_COLORS.get(shulker.getItem());
         this.title = shulker.getHoverName();
-        this.inventory = shulker.get(DataComponents.CONTAINER).allItemsCopyStream().toList();
+        this.inventory = shulker.get(DataComponents.CONTAINER).itemCopies().toList();
         this.parent = parent;
 
     }

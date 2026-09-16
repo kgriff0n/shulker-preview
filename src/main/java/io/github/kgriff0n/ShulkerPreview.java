@@ -11,7 +11,6 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import org.lwjgl.glfw.GLFW;
 
 import java.awt.*;
 import java.util.HashMap;
@@ -52,8 +51,8 @@ public class ShulkerPreview implements ClientModInitializer {
         KeyMapping.Category category = KeyMapping.Category.register(Identifier.fromNamespaceAndPath(MOD_ID, "main"));
 		key = KeyMappingHelper.registerKeyMapping(new KeyMapping(
 				"key.open_shulker",
-				InputConstants.Type.KEYSYM,
-				GLFW.GLFW_KEY_V,
+				InputConstants.Type.KEYBOARD,
+				InputConstants.KEY_V,
 				category
 		));
 
